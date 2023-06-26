@@ -6,8 +6,12 @@ namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
+        // Contador responsável por gerar um ID falso
+        // já que não estamos acessando nenhum banco de dados
         private volatile int count;
 
+        // Método responsável por retornar uma pessoa
+        // como não acessamos nenhum banco de dados estamos retornando um mock
         public Person FindByID(long id)
         {
             return new Person
@@ -31,21 +35,28 @@ namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
             return persons;
         }
 
+        // Método responsável por criar uma nova pessoa.
+        // Se tivéssemos um banco de dados este seria o momento de persistir os dados
         public Person Create(Person person)
         {
             return person;
         }
 
+        // Método responsável por atualizar uma pessoa para
+        // sendo mock retornamos a mesma informação passada
         public Person Update(Person person)
         {
             return person;
         }
 
+        // Método responsável por deletar uma pessoa de um ID
         public void Delete(long id)
         {
-            
-        }        
+            // Nossa lógica de exclusão viria aqui
+        }
 
+        // Método responsável por retornar todas as pessoas,
+        // novamente esta informação é um mocks
         private Person MockPerson(int i)
         {
             return new Person
