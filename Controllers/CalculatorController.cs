@@ -28,16 +28,28 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
             return BadRequest("Invalid Input");
         }
 
-        // Converte o numero informado que esta como string para decimal
-        private int ConvertToDecimal(string firstNumber)
+        // Valida se o numero informado é numerico
+        private bool IsNumeric(string strNumber)
         {
-            throw new NotImplementedException();
+            double number;
+            bool IsNumber = double.TryParse(
+                strNumber, 
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.NumberFormatInfo.InvariantInfo, out number);
+            return IsNumber;
         }
 
-        // Valida se o numero informado é numerico
-        private bool IsNumeric(string firstNumber)
+        // Converte o numero informado que esta como string para decimal
+        private decimal ConvertToDecimal(string strNumber)
         {
-            throw new NotImplementedException();
+            decimal decimalValue;
+            if (decimal.TryParse(strNumber, out decimalValue))
+            {
+                return decimalValue;
+            }
+            return 0;
         }
+
+        
     }
 }
