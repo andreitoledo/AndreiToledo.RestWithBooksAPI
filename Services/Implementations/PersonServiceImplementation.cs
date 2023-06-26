@@ -1,14 +1,20 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Model;
+using AndreiToledo.RestWithBooksAPI.Model.Context;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        // Contador responsável por gerar um ID falso
-        // já que não estamos acessando nenhum banco de dados
-        private volatile int count;
+
+        private MySQLContext _context;
+
+        public PersonServiceImplementation(MySQLContext context)
+        {
+            _context = context;
+        }
 
         // Método responsável por retornar uma pessoa
         // como não acessamos nenhum banco de dados estamos retornando um mock
@@ -16,7 +22,7 @@ namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
         {
             return new Person
             {
-                Id = IncrementAndGet(),
+                Id = 1,
                 FirstName = "Joaquim",
                 LastName = "Silva",
                 Address = "São Paulo - Capital - Brasil",
@@ -26,13 +32,8 @@ namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
 
         public List<Person> FindAll()
         {
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < 8; i++)
-            {
-                Person person = MockPerson(i);
-                persons.Add(person);
-            }
-            return persons;
+
+            return _context.Persons.ToList();
         }
 
         // Método responsável por criar uma nova pessoa.
@@ -55,24 +56,5 @@ namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
             // Nossa lógica de exclusão viria aqui
         }
 
-        // Método responsável por retornar todas as pessoas,
-        // novamente esta informação é um mocks
-        private Person MockPerson(int i)
-        {
-            return new Person
-            {
-                Id = IncrementAndGet(),
-                FirstName = "Person Name" + i,
-                LastName = "Person LastName" + i,
-                Address = "Address" + i,
-                Gender = "Male"
-            };
-        }
-
-        // toda vez que chmama o método, incrementa um numero a mais
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
-        }
     }
 }
