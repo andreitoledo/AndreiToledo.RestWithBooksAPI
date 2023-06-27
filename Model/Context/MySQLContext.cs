@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestWithASPNETUdemy.Model;
 
 namespace AndreiToledo.RestWithBooksAPI.Model.Context
 {
@@ -10,6 +11,7 @@ namespace AndreiToledo.RestWithBooksAPI.Model.Context
             : base(options) { }
         
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Book> Books { get; set; }
 
 
     }

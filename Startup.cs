@@ -51,8 +51,13 @@ namespace AndreiToledo.RestWithBooksAPI
             services.AddApiVersioning();
 
             // Injeção de Dependencia
+            // Person
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+
+            // Book
+            services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
         }
 
 
