@@ -1,5 +1,5 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Model;
-using AndreiToledo.RestWithBooksAPI.Services;
+using AndreiToledo.RestWithBooksAPI.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,14 +13,14 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         private readonly ILogger<PersonController> _logger;
 
         // Declaração do serviço utilizado
-        private IPersonService _personService;
+        private IPersonBusiness _personBusiness;
 
         // Injeção de uma instância de IPersonService
         // ao criar uma instância de PersonController
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
         {
             _logger = logger;
-            _personService = personService;
+            _personBusiness = personService;
         }
 
         // Mapeia requisições GET para https://localhost:{port}/api/person
@@ -28,7 +28,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_personService.FindAll());
+            return Ok(_personBusiness.FindAll());
         }
 
         // Mapeia as solicitações GET para https://localhost:{port}/api/person/{id}
@@ -37,7 +37,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _personService.FindByID(id);
+            var person = _personBusiness.FindByID(id);
             if (person == null) return NotFound();
             
             return Ok(person);
@@ -50,7 +50,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         {            
             if (person == null) return BadRequest();
             
-            return Ok(_personService.Create(person));
+            return Ok(_personBusiness.Create(person));
         }
 
         // Mapeia as solicitações PUT para https://localhost:{port}/api/person/
@@ -60,7 +60,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         {
             if (person == null) return BadRequest();
 
-            return Ok(_personService.Update(person));
+            return Ok(_personBusiness.Update(person));
         }
 
         // Mapeia solicitações DELETE para https://localhost:{port}/api/person/{id}
@@ -68,7 +68,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _personService.Delete(id);
+            _personBusiness.Delete(id);
             return NoContent();
         }
 

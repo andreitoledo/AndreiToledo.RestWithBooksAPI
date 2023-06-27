@@ -1,6 +1,6 @@
 using AndreiToledo.RestWithBooksAPI.Model.Context;
-using AndreiToledo.RestWithBooksAPI.Services;
-using AndreiToledo.RestWithBooksAPI.Services.Implementations;
+using AndreiToledo.RestWithBooksAPI.Business;
+using AndreiToledo.RestWithBooksAPI.Business.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

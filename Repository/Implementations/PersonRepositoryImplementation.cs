@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AndreiToledo.RestWithBooksAPI.Services.Implementations
+namespace AndreiToledo.RestWithBooksAPI.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
 
         private MySQLContext _context;
 
-        public PersonServiceImplementation(MySQLContext context)
+        public PersonRepositoryImplementation(MySQLContext context)
         {
             _context = context;
         }
