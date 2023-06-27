@@ -9,7 +9,6 @@ namespace AndreiToledo.RestWithBooksAPI.Business
         Person FindByID(long id);
         List<Person> FindAll();
         Person Update(Person person);
-        void Delete(long id);
-        bool Exists(long id);
+        void Delete(long id);        
     }
 }

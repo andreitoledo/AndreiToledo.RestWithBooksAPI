@@ -4,6 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AndreiToledo.RestWithBooksAPI.Controllers
+    /**
+    O cotroller roteia a requisição do Client, define o método através da rota(Route)
+    O método invoca o Businnes e o Businnes valida as regras de negócio.
+    Assim que as regras de negócio são validades, ele faz a chamada para o repository
+    O repository acessa base de dados persistindo ou recuperando as informações.
+     
+     */
 {
     [ApiVersion("1")]
     [ApiController]
