@@ -7,10 +7,12 @@ using AndreiToledo.RestWithBooksAPI.Repository;
 using AndreiToledo.RestWithBooksAPI.Repository.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -68,6 +70,22 @@ namespace AndreiToledo.RestWithBooksAPI
             // Versionamento API
             services.AddApiVersioning();
 
+            // Swagger
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "REST API's From 0 to Azure whith ASP.NET Core 5 and Docker",
+                        Version = "v1",
+                        Description = "API RESTful developed 'REST API's' From 0 to Azure ASP.NET Core 5",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Andrei Toledo",
+                            Url = new Uri("https://github.com/andreitoledo")
+                        }
+                    });            
+            });
+
             // Injeção de Dependencia
             // Person
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();            
@@ -91,6 +109,18 @@ namespace AndreiToledo.RestWithBooksAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // Gera Json
+            app.UseSwagger();
+            // Gera a pagina HTML do Swagger
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "REST API's From 0 to Azure whith ASP.NET Core 5 and Docker - v1");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
 
             app.UseAuthorization();
 
