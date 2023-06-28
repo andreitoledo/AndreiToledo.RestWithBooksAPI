@@ -3,6 +3,7 @@ using AndreiToledo.RestWithBooksAPI.Data.VO;
 using AndreiToledo.RestWithBooksAPI.Hypermedia;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace AndreiToledo.RestWithBooksAPI.Controllers
 /**
@@ -33,6 +34,10 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia requisições GET para https://localhost:{port}/api/person
         // Não obtém parâmetros para FindAll -> Search All
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<PersonVO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -43,6 +48,10 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // recebendo um ID como no Request Path
         // Obter com parâmetros para FindById -> Pesquisar por ID
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -55,6 +64,9 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia as solicitações POST para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]        
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {            
@@ -66,6 +78,9 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia as solicitações PUT para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]        
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
@@ -76,7 +91,10 @@ O repository acessa base de dados persistindo ou recuperando as informações.
 
         // Mapeia solicitações DELETE para https://localhost:{port}/api/person/{id}
         // recebendo um ID como no Request Path
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]        
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Delete(long id)
         {
             _personBusiness.Delete(id);
