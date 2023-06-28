@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using AndreiToledo.RestWithBooksAPI.Model.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AndreiToledo.RestWithBooksAPI.Model
 {
     [Table("person")]
-    public class Person
-    {        
-        [Column("id")]
-        public long Id { get; set; }
-
+    public class Person : BaseEntity
+    {   
         [Column("first_name")]
         public string FirstName { get; set; }
 

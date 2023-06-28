@@ -1,18 +1,17 @@
-using AndreiToledo.RestWithBooksAPI.Model.Context;
 using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Business.Implementations;
+using AndreiToledo.RestWithBooksAPI.Model.Context;
+using AndreiToledo.RestWithBooksAPI.Repository;
+using AndreiToledo.RestWithBooksAPI.Repository.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AndreiToledo.RestWithBooksAPI.Repository;
-using AndreiToledo.RestWithBooksAPI.Repository.Implementations;
 using Serilog;
-using System.Collections.Generic;
 using System;
-using AndreiToledo.RestWithBooksAPI.Repository.Generic;
+using System.Collections.Generic;
 
 namespace AndreiToledo.RestWithBooksAPI
 {
@@ -53,8 +52,7 @@ namespace AndreiToledo.RestWithBooksAPI
 
             // Injeção de Dependencia
             // Person
-            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();            
             // Book
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
             // Generic Repository
