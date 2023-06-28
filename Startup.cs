@@ -12,6 +12,7 @@ using AndreiToledo.RestWithBooksAPI.Repository.Implementations;
 using Serilog;
 using System.Collections.Generic;
 using System;
+using AndreiToledo.RestWithBooksAPI.Repository.Generic;
 
 namespace AndreiToledo.RestWithBooksAPI
 {
@@ -54,10 +55,11 @@ namespace AndreiToledo.RestWithBooksAPI
             // Person
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
-
             // Book
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+            // Generic Repository
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));            
+
         }
 
 
