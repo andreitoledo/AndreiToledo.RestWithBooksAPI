@@ -1,7 +1,7 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Business;
+using AndreiToledo.RestWithBooksAPI.Data.VO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RestWithASPNETUdemy.Model;
 
 namespace AndreiToledo.RestWithBooksAPI.Controllers
 {
@@ -36,7 +36,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
 
@@ -44,7 +44,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Book person)
+        public IActionResult Put([FromBody] BookVO person)
         {
             if (person == null) return BadRequest();
 
