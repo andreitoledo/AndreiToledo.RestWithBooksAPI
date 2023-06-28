@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 
 namespace AndreiToledo.RestWithBooksAPI
 {
@@ -46,6 +47,17 @@ namespace AndreiToledo.RestWithBooksAPI
             {
                 MigrateDatabase(connection);
             }
+
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml").ToString());
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json").ToString());
+            })
+            .AddXmlSerializerFormatters();
+
+
 
             // Versionamento API
             services.AddApiVersioning();
