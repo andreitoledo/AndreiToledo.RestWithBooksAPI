@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AndreiToledo.RestWithBooksAPI.Hypermedia
 {
-    public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportHyperMedia
+    public abstract class ContentResponseEnricher<T> : IResponseEnricher where T : ISupportsHyperMedia
     {
         public ContentResponseEnricher()
         {

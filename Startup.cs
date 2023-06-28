@@ -1,5 +1,7 @@
 using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Business.Implementations;
+using AndreiToledo.RestWithBooksAPI.Hypermedia.Enricher;
+using AndreiToledo.RestWithBooksAPI.Hypermedia.Filters;
 using AndreiToledo.RestWithBooksAPI.Model.Context;
 using AndreiToledo.RestWithBooksAPI.Repository;
 using AndreiToledo.RestWithBooksAPI.Repository.Generic;
@@ -57,7 +59,11 @@ namespace AndreiToledo.RestWithBooksAPI
             })
             .AddXmlSerializerFormatters();
 
+            // Adiciona para HATEOAS
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
 
+            services.AddSingleton(filterOptions);
 
             // Versionamento API
             services.AddApiVersioning();
@@ -91,6 +97,7 @@ namespace AndreiToledo.RestWithBooksAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi", "{controller=values}/{id?}");
             });
         }       
 

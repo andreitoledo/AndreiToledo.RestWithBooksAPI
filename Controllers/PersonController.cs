@@ -1,5 +1,6 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Data.VO;
+using AndreiToledo.RestWithBooksAPI.Hypermedia;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -32,6 +33,7 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia requisições GET para https://localhost:{port}/api/person
         // Não obtém parâmetros para FindAll -> Search All
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
@@ -41,6 +43,7 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // recebendo um ID como no Request Path
         // Obter com parâmetros para FindById -> Pesquisar por ID
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var person = _personBusiness.FindByID(id);
@@ -52,6 +55,7 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia as solicitações POST para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO person)
         {            
             if (person == null) return BadRequest();
@@ -62,6 +66,7 @@ O repository acessa base de dados persistindo ou recuperando as informações.
         // Mapeia as solicitações PUT para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
