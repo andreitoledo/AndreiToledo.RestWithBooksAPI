@@ -5,8 +5,8 @@ namespace AndreiToledo.RestWithBooksAPI.Hypermedia.Abstract
 {
     public interface IResponseEnricher
     {
-        bool CanEnrich(ResultExecutedContext context);
+        bool CanEnrich(ResultExecutingContext context);
 
-        Task Enrich(ResultExecutedContext context);
+        Task Enrich(ResultExecutingContext context);
     }
 }
