@@ -40,7 +40,15 @@ namespace AndreiToledo.RestWithBooksAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
+            // CORS - para aceitar aplicação em qualquer linguagem consumindo a API
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
             services.AddControllers();
 
             // Configuração com o Banco de Dados
@@ -109,6 +117,9 @@ namespace AndreiToledo.RestWithBooksAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // cors - depois do UseHttpsRedirection/UseRouting e antes do app.UseEndpoints(endpoints =>
+            app.UseCors();
 
             // Gera Json
             app.UseSwagger();
