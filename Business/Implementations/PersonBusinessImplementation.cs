@@ -1,47 +1,57 @@
-﻿using AndreiToledo.RestWithBooksAPI.Model;
-using AndreiToledo.RestWithBooksAPI.Model.Context;
+﻿using AndreiToledo.RestWithBooksAPI.Data.Converter.Implementations;
+using AndreiToledo.RestWithBooksAPI.Data.VO;
+using AndreiToledo.RestWithBooksAPI.Model;
 using AndreiToledo.RestWithBooksAPI.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AndreiToledo.RestWithBooksAPI.Business.Implementations
 {
     public class PersonBusinessImplementation : IPersonBusiness
     {
-
         private readonly IRepository<Person> _repository;
+
+        private readonly PersonConverter _converter;
 
         public PersonBusinessImplementation(IRepository<Person> repository)
         {
             _repository = repository;
+            _converter = new PersonConverter();
         }
 
         // NESSA CLASSE TAMBÉM IMPLEMENTARIA AS REGRAS DE NEGÓCIO.
        
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
 
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindAll());
         }
 
         // Método responsável por retornar uma pessoa        
-        public Person FindByID(long id)
+        public PersonVO FindByID(long id)
         {
-            return _repository.FindByID(id);
+            return _converter.Parse(_repository.FindByID(id));
         }
 
-        // Método responsável por criar uma nova pessoa.        
-        public Person Create(Person person)
+        // Método responsável por criar uma nova pessoa.
+        // A variavel chega em PersonVO e não da para persistir na base de dados
+        // É preciso parsear para uma a variavel personEntity e posso persistir
+        // O resultado é devolvido para a variavel gerado um autoincremental
+        // Depois converte a entidade para VO e devolve a resposta.
+
+        public PersonVO Create(PersonVO person)
         {
-            return _repository.Create(person);  
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);
         }
 
         // Método responsável por atualizar uma pessoa para        
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {   
             {
-                return _repository.Update(person);
+                var personEntity = _converter.Parse(person);
+                personEntity = _repository.Update(personEntity);
+                return _converter.Parse(personEntity);
             } 
         }        
 

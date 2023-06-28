@@ -1,15 +1,15 @@
-﻿using AndreiToledo.RestWithBooksAPI.Model;
-using AndreiToledo.RestWithBooksAPI.Business;
+﻿using AndreiToledo.RestWithBooksAPI.Business;
+using AndreiToledo.RestWithBooksAPI.Data.VO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AndreiToledo.RestWithBooksAPI.Controllers
-    /**
-    O cotroller roteia a requisição do Client, define o método através da rota(Route)
-    O método invoca o Businnes e o Businnes valida as regras de negócio.
-    Assim que as regras de negócio são validades, ele faz a chamada para o repository
-    O repository acessa base de dados persistindo ou recuperando as informações.     
-     */
+/**
+O cotroller roteia a requisição do Client, define o método através da rota(Route)
+O método invoca o Businnes e o Businnes valida as regras de negócio.
+Assim que as regras de negócio são validades, ele faz a chamada para o repository
+O repository acessa base de dados persistindo ou recuperando as informações.     
+ */
 {
     [ApiVersion("1")]
     [ApiController]
@@ -52,7 +52,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         // Mapeia as solicitações POST para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {            
             if (person == null) return BadRequest();
             
@@ -62,7 +62,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
         // Mapeia as solicitações PUT para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
 
