@@ -91,6 +91,18 @@ O repository acessa base de dados persistindo ou recuperando as informações.
             return Ok(_personBusiness.Update(person));
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch(long id)
+        {
+            var person = _personBusiness.Disable(id);
+            return Ok(person);
+        }
+
         // Mapeia solicitações DELETE para https://localhost:{port}/api/person/{id}
         // recebendo um ID como no Request Path
         [HttpDelete("{id}")]        

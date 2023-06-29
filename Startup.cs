@@ -149,8 +149,11 @@ namespace AndreiToledo.RestWithBooksAPI
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
+            // PATCH
+            services.AddScoped<IPersonRepository, PersonRepository>();
+
             // Repositorio Generico
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));            
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));           
 
         }
 
