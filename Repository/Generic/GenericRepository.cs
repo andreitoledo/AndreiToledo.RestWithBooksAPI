@@ -9,7 +9,7 @@ namespace AndreiToledo.RestWithBooksAPI.Repository.Generic
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private MySQLContext _context;
+        protected MySQLContext _context;
 
         // Dinamicamente, seta o dataset em MySQLContext
         private DbSet<T> dataset;
