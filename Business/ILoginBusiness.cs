@@ -8,6 +8,6 @@ namespace AndreiToledo.RestWithBooksAPI.Business
 
         TokenVO ValidateCredentials(TokenVO token);
 
-        //bool RevokeToken(string userName);
+        bool RevokeToken(string userName);
     }
 }

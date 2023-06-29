@@ -1,5 +1,6 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Data.VO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AndreiToledo.RestWithBooksAPI.Controllers
@@ -34,6 +35,18 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
             var token = _loginBusiness.ValidateCredentials(tokenVo);
             if (token == null) return BadRequest("Ivalid client request");
             return Ok(token);
+        }
+
+        [HttpGet]
+        [Route("revoke")]
+        [Authorize("Bearer")]
+        public IActionResult Revoke()
+        {
+            var username = User.Identity.Name;
+            var result = _loginBusiness.RevokeToken(username);
+
+            if (!result) return BadRequest("Ivalid client request");
+            return NoContent();
         }
 
     }
