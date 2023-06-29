@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AndreiToledo.RestWithBooksAPI.Model
@@ -23,6 +24,6 @@ namespace AndreiToledo.RestWithBooksAPI.Model
         public string RefreshToken { get; set; }
 
         [Column("refresh_token_expiry_time")]
-        public string RefreshTokenExpiryTime { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
