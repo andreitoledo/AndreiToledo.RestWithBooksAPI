@@ -1,5 +1,6 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Data.VO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace AndreiToledo.RestWithBooksAPI.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class BookController : ControllerBase
     {

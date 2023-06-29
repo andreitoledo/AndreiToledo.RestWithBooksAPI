@@ -1,6 +1,7 @@
 ﻿using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Data.VO;
 using AndreiToledo.RestWithBooksAPI.Hypermedia;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ O repository acessa base de dados persistindo ou recuperando as informações.
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {        
