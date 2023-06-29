@@ -6,5 +6,7 @@ namespace AndreiToledo.RestWithBooksAPI.Repository
     public interface IUserRepository
     {
         User ValidateCredentials(UserVO user);
+
+        User RefreshUserInfo(User user);
     }
 }

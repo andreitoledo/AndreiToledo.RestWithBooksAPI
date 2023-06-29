@@ -1,10 +1,15 @@
 using AndreiToledo.RestWithBooksAPI.Business;
 using AndreiToledo.RestWithBooksAPI.Business.Implementations;
+using AndreiToledo.RestWithBooksAPI.Configurations;
 using AndreiToledo.RestWithBooksAPI.Hypermedia.Enricher;
 using AndreiToledo.RestWithBooksAPI.Hypermedia.Filters;
 using AndreiToledo.RestWithBooksAPI.Model.Context;
 using AndreiToledo.RestWithBooksAPI.Repository;
 using AndreiToledo.RestWithBooksAPI.Repository.Generic;
+using AndreiToledo.RestWithBooksAPI.Services;
+using AndreiToledo.RestWithBooksAPI.Services.Implementations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -12,11 +17,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace AndreiToledo.RestWithBooksAPI
 {
@@ -40,6 +48,44 @@ namespace AndreiToledo.RestWithBooksAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // Configuração para JWT - inicio
+            var tokenConfigurations = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                   Configuration.GetSection("TokenConfigurations")
+               )
+               .Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = tokenConfigurations.Issuer,
+                        ValidAudience = tokenConfigurations.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                    };
+                });
+
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+            // Configuração para JWT - fim
+
 
             // CORS - para aceitar aplicação em qualquer linguagem consumindo a API
             services.AddCors(options => options.AddDefaultPolicy(builder =>
@@ -94,17 +140,19 @@ namespace AndreiToledo.RestWithBooksAPI
                     });            
             });
 
-            // Injeção de Dependencia
-            // Person
-            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();            
-            // Book
+            // Dependency Injection            
+            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();                        
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            // Generic Repository
+
+            // Login JWT
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // Repositorio Generico
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));            
 
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

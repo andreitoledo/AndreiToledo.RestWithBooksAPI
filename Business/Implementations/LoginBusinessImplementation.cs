@@ -43,9 +43,11 @@ namespace AndreiToledo.RestWithBooksAPI.Business.Implementations
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpiry).ToString();
-            
+
+            _repository.RefreshUserInfo(user);  
+
             DateTime createDate = DateTime.Now;
-            DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+            DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes); 
 
             return new TokenVO(
                 true,
