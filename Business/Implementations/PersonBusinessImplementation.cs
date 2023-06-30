@@ -32,6 +32,11 @@ namespace AndreiToledo.RestWithBooksAPI.Business.Implementations
             return _converter.Parse(_repository.FindByID(id));
         }
 
+        public List<PersonVO> FindByName(string firstName, string lastName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName, lastName));
+        }
+
         // Método responsável por criar uma nova pessoa.
         // A variavel chega em PersonVO e não da para persistir na base de dados
         // É preciso parsear para uma a variavel personEntity e posso persistir
@@ -68,7 +73,5 @@ namespace AndreiToledo.RestWithBooksAPI.Business.Implementations
             _repository.Delete(id);
 
         }
-
-
     }
 }

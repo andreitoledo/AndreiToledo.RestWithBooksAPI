@@ -63,6 +63,19 @@ O repository acessa base de dados persistindo ou recuperando as informações.
             return Ok(person);
         }
 
+        [HttpGet("findPersonByName")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            var person = _personBusiness.FindByName(firstName, lastName);
+            if (person == null) return NotFound();
+            return Ok(person);
+        }
+
         // Mapeia as solicitações POST para https://localhost:{port}/api/person/
         // [FromBody] consome o objeto JSON enviado no corpo da requisição
         [HttpPost]
