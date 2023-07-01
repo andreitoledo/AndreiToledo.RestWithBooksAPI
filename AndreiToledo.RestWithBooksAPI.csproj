@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="db\collections\" />
+    <Folder Include="UploadDir\" />
   </ItemGroup>
 
 </Project>
