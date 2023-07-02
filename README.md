@@ -11,7 +11,15 @@
 > versionamento, HATEOAS, Swagger (OpenAPI), autenticação etc.
 
 ---
-![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/0b50fdb2-74d2-4f86-8f27-7512d9fe475c)
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/1eeb7b05-595d-4998-a55f-e8bdef1ccdbb)
+---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/e9460ad0-211b-4954-a196-de033155f021)
+---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/7f7d0bb3-fd6f-4ef9-97e1-2dfe93172439)
+---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/231dad22-4b61-4bb3-8cfd-0cbdf9040224)
+---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/33306adc-752e-4f18-8754-3bd5c1b54829)
 ---
 ![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/f7a5e93d-7ec2-463d-9b9b-b585ee55b952)
 
