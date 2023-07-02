@@ -10,15 +10,6 @@
 > Nesse sistema, foi abordado noções de HTTP, verbos/métodos, tipos de parâmetros, paginação, upload e download de arquivos,
 > versionamento, HATEOAS, Swagger (OpenAPI), autenticação etc.
 
-> #### Caso de Uso um Sistemas de Gestão Hospitalar.
-> #### Principais features do Asp .Net Core, como Controllers, Models, Views, ViewComponets, etc...
-> #### Sistema de Rotas, com MapRoutes na Startup Class e Attributes Routes nas Controllers e Actions.
-> #### Segurança com o Microsoft Asp .Net Identty Core, login, registro, confirmação por e-mail, gerenciamento de conta, etc.. 
-> #### Controle de serviços de Autenticação e Autorização: UseAuthentication() UseAuthorization();
-> #### Modelos de dados criados e gerenciados através do EntityFramewor Core para o Banco de Dados Relacional MS SQL Server.
-> #### Sistema em Camadas, seguindo os Conceitos do DDD e os Princípios SOLID.
-> #### Views implementada com ViewComponents e Custom Tag Helpers.
-> #### Persistência de dados com ORM EntityFramework Core.*
 ---
 ![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/0b50fdb2-74d2-4f86-8f27-7512d9fe475c)
 ---
