@@ -20,6 +20,9 @@
 > #### Views implementada com ViewComponents e Custom Tag Helpers.
 > #### Persistência de dados com ORM EntityFramework Core.*
 ---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/0b50fdb2-74d2-4f86-8f27-7512d9fe475c)
+---
+![image](https://github.com/andreitoledo/AndreiToledo.RestWithBooksAPI/assets/16118637/f7a5e93d-7ec2-463d-9b9b-b585ee55b952)
 
 ----
 >#### @author:                             
