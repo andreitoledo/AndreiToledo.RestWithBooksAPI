@@ -5,8 +5,8 @@
 ---
 ---
 > #### * Fundamentos centrais de Webservices API's REST e RESTful.
-> O objetivo dessa API é prover um ponto de partida para expandir melhoras no código a critério de quem o usar como consulta
-> Conhecimentos aplicados na implementação de uma API RESTful com ASP.NET CORE 5 E C#
+> O objetivo dessa API é prover um ponto de partida para expandir melhoras no código a critério de queira usar.
+> Conhecimentos aplicados na implementação de uma API RESTful com ASP.NET CORE 5 E C#.
 > Nesse sistema, foi abordado noções de HTTP, verbos/métodos, tipos de parâmetros, paginação, upload e download de arquivos,
 > versionamento, HATEOAS, Swagger (OpenAPI), autenticação etc.
 
