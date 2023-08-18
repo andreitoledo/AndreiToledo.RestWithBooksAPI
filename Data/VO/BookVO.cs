@@ -1,8 +1,11 @@
-﻿using System;
+﻿using AndreiToledo.RestWithBooksAPI.Hypermedia;
+using AndreiToledo.RestWithBooksAPI.Hypermedia.Abstract;
+using System;
+using System.Collections.Generic;
 
 namespace AndreiToledo.RestWithBooksAPI.Data.VO
 {
-    public class BookVO
+    public class BookVO : ISupportsHyperMedia
     {
         public long Id { get; set; }
 
@@ -13,6 +16,8 @@ namespace AndreiToledo.RestWithBooksAPI.Data.VO
         public decimal Price { get; set; }
     
         public DateTime LaunchDate { get; set; }
+
+        public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 
 }
